@@ -77,7 +77,7 @@ if doestimate
             par.ref = CS;
             for i=1:nt
                 fn_progress(i)
-                if ~isempty(x), par.shift0 = x; end
+                if ~isempty(x), par.shift0 = x(2:3); end
                 x = fn_register(Y(:,:,i),par);                
                 X(i,2:3) = x'; % no more rotation!!!
             end
@@ -88,7 +88,7 @@ if doestimate
             mY2 = filt2(mean(Y,3),15,'h');
             par = fn_register('par');
             par.ref = CS2;
-            if ~isempty(x), par.shift0 = x; end
+            if ~isempty(x), par.shift0 = x(2:3); end
             X = zeros(nt,3);
             X(:,2:3) = fn_register(mY2,par)';
         case {'nonlinear' 'nonlinear(trial)'}

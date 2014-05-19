@@ -2067,8 +2067,7 @@ classdef madflow < interface
                     % special additional computation
                     if ~ok(k) && ~isempty(findstr(resdisp(k).data,'volume')) ...
                             && isequal(resdisp(k).trial,M.ktrial)
-                        edgek = fn_switch(resdisp(k).data,'volume',objk, ...
-                            'volumef',objk.edge);
+                        if strcmp(resdisp(k).data,'volume'), edgek = objk; else edgek = objk.edge; end
                         % no volume data -> try to get it by interpolating the movie data
                         switch edgek.interpflag
                             case 'movie'

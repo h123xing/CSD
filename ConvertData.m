@@ -27,15 +27,14 @@ x = uint8(zeros(info(1).Width,info(1).Height,fps));
 
 % outer loop creates each trial; inner loop goes through each frame
 for k = 1:numTrials
+    
     % keeps track of which frames to save
-    start = (k-1)*fps + 1;
-    stop = start + fps;
-    run = 1;
-    for j = start:stop
+    start = (k-1)*fps;
+    
+    for j = 1:fps
         % note: image transposed into array because FastFlow seems to
         % transpose array onto GUI
-        x(:,:,run) = transpose(imread(filename,'Index',j));
-        run = run + 1;
+        x(:,:,j) = transpose(imread(filename,'Index',start + j));
     end
     
     % saves trial with specific formatting
@@ -47,4 +46,5 @@ for k = 1:numTrials
     display = ['trial ' num2str(k) ' done']; 
     disp(display);
 end
+disp('Converting done.');
 end
